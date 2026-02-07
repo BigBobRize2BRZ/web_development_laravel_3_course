@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
-
 
 class HomeController extends Controller
 {
@@ -66,7 +66,51 @@ class HomeController extends Controller
         // $users = DB::table('users')->pluck('name', 'email');
         // dd($users);
 
-        $cities = DB::table('city')->get();
+        // $cities = DB::table('city')->get();
+        // dd($cities);
+
+        // // Не работает, не трогать
+        // DB::table('city')->orderBy('ID')->chunk(100, function(Collection $cities) {
+        //     foreach ($cities as $city) {
+        //         if ($city->Name == 'Salvador') {
+        //             return false;
+        //         }
+        //     }
+        // });
+
+
+        // $cities = DB::table('city')->select(['ID', 'Name'])->limit(10)->get();
+        // dd($cities);
+
+
+        // $cities = DB::table('city')
+        //     ->where([['ID', '>', 3], ['ID', '<', 10]])
+        //     // // ->orWhere('ID', '<', 20)
+        //     ->get();        
+        // dd($cities);
+
+        // $cities = DB::table('city')
+        //     ->whereRaw('(ID between ? and ? and Name != ?) or (ID = ?)', [2, 10, 'Qandahar', 1])
+        //     ->get();
+        // dd($cities);
+
+
+        // $cities = DB::table('city')->count();
+        // $cities = DB::table('city')->max('Population');
+        // $cities = DB::table('city')->min('Population');
+
+        // $cities = DB::table('city')
+        //     ->where('Population', 'desc')
+        //     ->limit(1)
+        //     ->first('Population');
+        // dd($cities);
+
+
+        $cities = DB::table('city')->select(['ID', 'Name'])
+            ->whereIn('id', [1,2,3])
+            ->get();
+
+        $cities = DB::table('city')->where('Name', 'like', '%am%')->get();
         dd($cities);
 
 
