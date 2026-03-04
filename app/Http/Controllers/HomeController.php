@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -106,15 +108,30 @@ class HomeController extends Controller
         // dd($cities);
 
 
-        $cities = DB::table('city')->select(['ID', 'Name'])
-            ->whereIn('id', [1,2,3])
-            ->get();
+        // $cities = DB::table('city')->select(['ID', 'Name'])
+        //     ->whereIn('id', [1,2,3])
+        //     ->get();
 
-        $cities = DB::table('city')->where('Name', 'like', '%am%')->get();
-        dd($cities);
+        // $cities = DB::table('city')->where('Name', 'like', '%am%')->get();
+        // dd($cities);
 
+        // $posts = Post::all()->toArray();
+        // $posts = Post::first()->toArray();
+        // $posts = Post::find(1, ['id', 'title'])->toArray();
+        // dump($posts);
 
-        return view('home.test', compact('name', 'age', 'title', 'users')); // Передаются
+        // $countries = Country::all(['Code', 'Name'])->toArray();
+        $countries = Country::query()
+            ->where('Population', '>', 1000000)
+            ->orderBy('Population', 'desc')
+            ->limit(5)
+            ->get(['Name', 'Population'])
+            ->toArray();
+        dump($countries);
+
+        // return view('home.test', compact('name', 'age', 'title', 'users')); // Передаются
+
+        return response()->json($countries);
     }
 
     // 3) Через view()->with([])
