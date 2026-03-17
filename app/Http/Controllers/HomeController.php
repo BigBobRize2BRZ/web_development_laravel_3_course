@@ -238,9 +238,26 @@ class HomeController extends Controller
         // ]);
 
 
-        $category = Category::query()->find(1);
-        $post = Post::query()->find(4);
+        // $category = Category::query()->find(1);
+        // $post = Post::query()->find(4);
 
+
+
+
+        // $category = Category::query()->find(1);
+        // $post = Post::query()->find(5);
+        // $post->category()->assciate($category);
+        // $post->save();
+        
+        // $post = Post::query()->find(7);
+        // $post->category()->disassociate();
+        // $post->save();
+
+        // $post = Post::query()->find(8);
+        // $post->tags()->attach([2, 3, 4]); // в post_tag добавляет
+        // $post->tags()->detach([1]);
+        // $post->tags()->sync([1, 2, 3, 4]); // заполняет все
+        // $post->tags()->toggle([1, 2, 3, 4]); // переключает
 
         return view('home.test', compact('name', 'age', 'title', 'users'));
     }
