@@ -120,3 +120,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/test', [HomeController::class, 'test'])->name('home.test');
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+
+Route::post('/store', [HomeController::class, 'store'])->withoutMiddleware(VerifyCsrfToken::class);
+Route::post('/update', [HomeController::class, 'store'])->withoutMiddleware(VerifyCsrfToken::class);

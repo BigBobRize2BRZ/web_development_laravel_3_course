@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Country;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -121,17 +123,126 @@ class HomeController extends Controller
         // dump($posts);
 
         // $countries = Country::all(['Code', 'Name'])->toArray();
-        $countries = Country::query()
-            ->where('Population', '>', 1000000)
-            ->orderBy('Population', 'desc')
-            ->limit(5)
-            ->get(['Name', 'Population'])
-            ->toArray();
-        dump($countries);
+        // $countries = Country::query()
+        //     ->where('Population', '>', 1000000)
+        //     ->orderBy('Population', 'desc')
+        //     ->limit(5)
+        //     ->get(['Name', 'Population'])
+        //     ->toArray();
+        // dump($countries);
 
         // return view('home.test', compact('name', 'age', 'title', 'users')); // Передаются
 
-        return response()->json($countries);
+        // return response()->json($countries);
+
+        // Post::query()->create([
+        //     'title' => 'Post 2',
+        //     'content' => 'Post 2 Content',
+        //     'category_id' => rand(1,2),
+        //     'status' => 1,
+        // ]);
+
+        // $post = Post::query()->find(2);
+        // dump($post->delete());
+
+        // $category = Category::query()->find(1);
+        // dump($category->toArray());
+
+        // $category = Category::query()->where('category_id', '=', 2);
+        // dump($category);
+
+
+        // $category = Post::query()->find(2);
+        // dump($category->toArray());
+
+        // dump($category->post);
+        // // dump($category->post->title);
+
+        // $post = Post::query()->find(2);
+        // dump($post->toArray());
+
+        // dump($post->category->title);
+
+
+
+        // $category = Category::query()->find(2);
+        // dump($category->toArray());
+        // $posts = $category->posts;
+        // dump($posts->toArray());
+
+        // $post = Post::query()->find(2);
+        // dump($post->toArray());
+        // dump($post->category->toArray());
+
+        // $categories = Category::with('posts')->get();
+        // dump($categories->toArray());
+
+        // foreach ($categories as $category) {
+        //     echo "{$category->title} <br>";
+        //     foreach ($category->posts as $post) {
+        //         echo "{$post->title} <br>";
+        //     }
+        //     echo '<hr>';
+        // } 
+
+
+
+        // $post = Post::query()->find(2);
+
+        // $tags = $post->tags;
+        // dump($post);
+        // $tags = $post->tags;
+        // dump($tags);
+
+        // foreach ($tags as $tag) {
+        //     echo "{$tag->title} - {$tag->pivot->created_at} <br>";
+        // }
+
+        // $tag = Tag::query()->find(2);
+
+        // $posts = $tag->posts;
+        // dump($tag);
+        // $posts = $tag->posts;
+        // dump($posts);
+
+        // foreach ($posts as $post) {
+        //     echo "{$post->title} - {$post->pivot->created_at} <br>";
+        // }
+
+        // $category = Category::query()->find(2);
+        // $category->posts()->save(new Post([
+        //     'title' => 'Post 7',
+        //     'Slug' => 'Post-7',
+        //     'content' => 'Post 7 content',
+        //     'body' => 'Post 10 body',
+        //     'status' => 1,
+        //     'views' => 0,
+        // ]));
+
+        // $category = Category::query()->find(2);
+
+        // $category->posts()->saveMany([
+        //     new Post(['title' => 'Post 8', 'slug' => 'Post-8', 'content' => 'Post 8 content', 'body' => 'Post 8 body', 'status' => 1, 'views' => 0]),
+        //     new Post(['title' => 'Post 9', 'slug' => 'Post-9', 'content' => 'Post 9 content', 'body' => 'Post 9 body', 'status' => 1, 'views' => 0]),
+        // ]);
+
+        // $category = Category::query()->find(2);
+
+        // $category->posts()->create([
+        //     'title' => 'Post 10',
+        //     'slug' => 'Post-10',
+        //     'content' => 'Post 10 content',
+        //     'body' => 'Post 10 body',
+        //     'status' => 1, 
+        //     'views' => 0,
+        // ]);
+
+
+        $category = Category::query()->find(1);
+        $post = Post::query()->find(4);
+
+
+        return view('home.test', compact('name', 'age', 'title', 'users'));
     }
 
     // 3) Через view()->with([])
@@ -139,5 +250,30 @@ class HomeController extends Controller
     {
         $title = 'Contact page';
         return view('home.contact')->with(['title' => $title]);
+    }
+
+    public function store(Request $request)
+    {
+        Post::query()->create($request->all());
+        return $request->all();
+    }
+
+    public function update(Request $request)
+    {
+        // $post = Post::query()->find($request->id);
+        // $post->title = $request->title;
+        // $post->content = $request->content;
+        // $post->category_id = $request->category_id;
+        // $post->status = $request->status;
+        // $post->save();
+
+        // $post = Post::query()->findOrFail($request->id);
+        // $post->update($request->all());
+
+        Post::query()
+            ->where('id', $request->id)
+            ->update($request->all());
+
+        return 'OK';
     }
 }
