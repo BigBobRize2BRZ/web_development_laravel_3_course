@@ -11,9 +11,16 @@ class PostController extends Controller
         return view('posts.create', ['title' => 'add post']);
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        dump($_POST);
+        $validated = $request->validate([
+            'title' => ['required', 'max:5'],
+            'slug' => ['required', 'max:225', 'unique:posts'],
+            'content' => ['required'],
+            'category_id' => ['required', 'exists:categories,id'],
+        ]);
+
+        dump($request->all());
     }
 }
 

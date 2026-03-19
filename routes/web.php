@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\ProductController;
-use App\Http\Controllers\admin\PostController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\TestController;
