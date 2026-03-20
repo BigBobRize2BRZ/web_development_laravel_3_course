@@ -5,6 +5,12 @@
 @section('content')
 <h1>{{ $title }}</h1>
 
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 @if ($errors->any())
 <div class="alert alert-danger">
     <ul>
@@ -37,12 +43,12 @@
 
     <div class="mb-3">
         <label for="slug" class="form-label">Slug</label>
-        <input type="text" class="form-control" id="slug" name="slug" placeholder="Post slug">
+        <input type="text" class="form-control @error('slug') is-2123invalid @enderror" value="{{ old('slug') }}" id="slug" name="slug" placeholder="Post slug">
     </div>
 
     <div class="mb-3">
         <label for="floatingTextarea" class="form-label">Content</label>
-        <textarea class="form-control"  placeholder="Post content" id="content" name="content"></textarea>
+        <textarea class="form-control @error('content') is-invalid @enderror" value="{{ old('content') }}" placeholder="Post content" id="content" name="content"></textarea>
     </div>
 
     <button type="submit" class="btn btn-primary"> Create Post </button>
