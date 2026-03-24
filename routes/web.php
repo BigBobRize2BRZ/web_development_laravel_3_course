@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
@@ -128,3 +129,9 @@ Route::post('/update', [HomeController::class, 'store'])->withoutMiddleware(Veri
 
 Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('posts', [PostController::class, 'store'])->name('posts.store');
+
+//! Верификация пользователя
+
+Route::get('register', [UserController::class, 'create'])->name('register');
+Route::post('register', [UserController::class, 'store'])->name('user.store');
+Route::get('login', [UserController::class, 'login'])->name('login');

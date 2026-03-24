@@ -50,6 +50,22 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{route('posts.create')}}">Add Post</a>
                     </li>
+
+                    @if (Route::has('login'))
+                    @auth
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                    </li>
+                    @else
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{route('register')}}">Register</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{route('login')}}">Login</a>
+                    </li>
+                    @endif
+                    @endif
                 </ul>
 
             </div>
@@ -58,6 +74,22 @@
     @show
 
     <div class="container mt-3">
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
         @yield('content')
     </div>
 
