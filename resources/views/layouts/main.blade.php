@@ -54,7 +54,13 @@
                     @if (Route::has('login'))
                     @auth
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                        <a class="nav-link active" aria-current="page" href="{{route('dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">{{ auth()->user()->name  }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href{{route('logout')}}">Logout</a>
                     </li>
                     @else
                     <li class="nav-item">
