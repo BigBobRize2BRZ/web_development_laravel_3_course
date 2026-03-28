@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function create()
     {
-        return view('user.create');
+        return view('user.create', ['title' => 'Register']);
     }
 
     public function store(Request $request)
@@ -40,5 +40,8 @@ class UserController extends Controller
         return redirect()->route('login');
     }
 
-    
+    public function login()
+    {
+        return view('user.login', ['title' => 'Login']);
+    }
 }

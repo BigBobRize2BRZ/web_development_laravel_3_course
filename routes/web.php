@@ -134,7 +134,7 @@ Route::post('posts', [PostController::class, 'store'])->name('posts.store');
 
 //! Верификация пользователя
 
-Route::middleware(['auth', 'verifed'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 });
 
