@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Desk;
+use App\Models\DeskList;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,15 +11,13 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class DeskListFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = DeskList::class;
+
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->sentence(3),
+            'desk_id' => Desk::factory(),
         ];
     }
 }

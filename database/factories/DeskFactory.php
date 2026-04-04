@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Desk;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,15 +10,12 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class DeskFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Desk::class;
+
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->unique()->word() . ' ' . $this->faker->randomNumber(2),
         ];
     }
 }
