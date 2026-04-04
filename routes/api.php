@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\BlogController;
 use App\Http\Controllers\Api\DeskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('desks', DeskController::class);
 
-// Route::apiResource([
-//     'desks' => DeskController::class,
-// ]);
+Route::post('signup', [AuthController::class, 'signup']);
+Route::post('signin', [AuthController::class, 'signin']);
+
+Route::apiResource('blogs', BlogController::class);

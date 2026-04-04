@@ -27,7 +27,7 @@ class DeskController extends Controller
      */
     public function store(DeskStoreRequest $request)
     {
-        // Добавление
+        // Создание нового элемента
         $created_desk = Desk::create($request->validated());
 
         return new DeskResource($created_desk);
@@ -47,6 +47,7 @@ class DeskController extends Controller
      */
     public function update(DeskStoreRequest $request, Desk $desk)
     {
+        // Обновит элемент
         $desk->update($request->validated());
         return new DeskResource($desk);
     }
@@ -56,6 +57,7 @@ class DeskController extends Controller
      */
     public function destroy(Desk $desk)
     {
+        // Удалит элемент
         $desk->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
